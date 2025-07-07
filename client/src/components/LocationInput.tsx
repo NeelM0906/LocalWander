@@ -39,14 +39,19 @@ const LocationInput = ({ onSearch, isLoading }: LocationInputProps) => {
   return (
     <div className="max-w-xl mx-auto">
       <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2">
-        <input
-          type="text"
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-          placeholder="Enter a zip code or address..."
-          disabled={isLoading}
-          className="flex-grow w-full px-5 py-3 bg-card border border-gray-600 rounded-md focus:ring-2 focus:ring-accent focus:outline-none transition-all text-white placeholder-gray-400"
-        />
+        <div className="relative flex-grow">
+          <input
+            type="text"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            placeholder="Enter a zip code or address..."
+            disabled={isLoading}
+            className="w-full px-5 py-3 bg-card border border-gray-600 rounded-md focus:ring-2 focus:ring-accent focus:outline-none transition-all text-white placeholder-gray-400"
+          />
+          <div className="absolute right-3 top-3 text-xs text-gray-500 pointer-events-none">
+            Auto-complete coming soon
+          </div>
+        </div>
         <div className="flex gap-2">
           <button
             type="button"

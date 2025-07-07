@@ -39,10 +39,12 @@ Local Wander is a full-stack web application that generates personalized travel 
 - **Output**: Structured JSON with itineraries, stops, and source references
 
 ### Frontend Features
-- **Location Input**: Text input with geolocation support
+- **Location Input**: Text input with geolocation support (address autocomplete in development)
 - **Itinerary Display**: Card-based layout with detailed modal views
 - **Favorites System**: Local storage-based favorites with heart icons
 - **Responsive Design**: Mobile-first approach with Tailwind CSS
+- **Navigation**: Three-page navigation (Home, Favorites, Wander Buddies)
+- **Interactive Modals**: Detailed itinerary views with Google Maps integration
 
 ## Data Flow
 
@@ -86,7 +88,11 @@ Local Wander is a full-stack web application that generates personalized travel 
 - **Development**: Automatic Replit integration with cartographer plugin
 
 ## Changelog
-- July 07, 2025. Initial setup
+- July 07, 2025: Initial setup
+- July 07, 2025: Built complete hyper-local discovery app with AI-powered itinerary generation
+- July 07, 2025: Added favorites system with localStorage persistence
+- July 07, 2025: Fixed TypeScript errors in storage layer
+- July 07, 2025: Marked address autocomplete as "in development" feature
 
 ## User Preferences
 
