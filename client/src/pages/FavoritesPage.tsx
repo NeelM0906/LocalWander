@@ -58,14 +58,20 @@ const FavoritesPage = () => {
           ))}
         </div>
       ) : (
-        <div className="text-center py-16 px-6 bg-card rounded-lg border border-gray-700">
-          <div className="flex justify-center items-center mb-4">
-            <MapPinIcon className="w-12 h-12 text-gray-500" />
+        <div className="text-center py-20 px-8 glass-morphism rounded-2xl border border-gray-600/50">
+          <div className="flex justify-center items-center mb-6">
+            <div className="relative">
+              <MapPinIcon className="w-16 h-16 text-gray-500 animate-float" />
+              <div className="absolute inset-0 bg-gradient-to-r from-accent/20 to-blue-400/20 rounded-full blur-lg"></div>
+            </div>
           </div>
-          <p className="text-xl font-semibold text-white">No adventures saved yet.</p>
-          <p className="text-gray-400 mt-2">
-            Go <Link href="/" className="text-accent hover:underline">explore</Link> and like some stops to see them here!
+          <h3 className="text-2xl font-bold text-white mb-3">No adventures saved yet</h3>
+          <p className="text-gray-400 mb-6 leading-relaxed">
+            Start exploring and save your favorite spots to build your personal collection of amazing places!
           </p>
+          <Link href="/" className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-accent to-blue-400 text-primary font-bold rounded-xl hover:from-accent/90 hover:to-blue-400/90 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+            🗺️ Start Exploring
+          </Link>
         </div>
       )}
     </div>
