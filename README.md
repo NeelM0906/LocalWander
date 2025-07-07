@@ -39,7 +39,7 @@ A hyper-local discovery app that generates AI-powered micro-adventures and itine
 
 ### Backend
 - **Express.js** with TypeScript
-- **Google Gemini AI** for itinerary generation
+- **Google Maps and Gemini AI** for itinerary generation and presentation. Gemini can be replaced with any other LLM.
 - **In-memory storage** with database-ready interface
 - **Drizzle ORM** for future PostgreSQL integration
 
