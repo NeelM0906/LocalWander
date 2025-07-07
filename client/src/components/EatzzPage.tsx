@@ -116,7 +116,7 @@ const EatzzPage = () => {
       const data = await response.json();
       
       return data.map((item: any, index: number) => ({
-        id: item.camis || `restaurant-${index}`,
+        id: item.camis ? `${item.camis}-${index}` : `restaurant-${index}-${Date.now()}`,
         name: item.dba || item.doing_business_as_name || 'Restaurant',
         address: formatAddress(item),
         cuisine: determineCuisineType(item.cuisine_description || ''),
