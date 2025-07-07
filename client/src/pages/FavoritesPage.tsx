@@ -58,19 +58,16 @@ const FavoritesPage = () => {
           ))}
         </div>
       ) : (
-        <div className="text-center py-20 px-8 glass-morphism rounded-2xl border border-gray-600/50">
-          <div className="flex justify-center items-center mb-6">
-            <div className="relative">
-              <MapPinIcon className="w-16 h-16 text-gray-500 animate-float" />
-              <div className="absolute inset-0 bg-gradient-to-r from-accent/20 to-blue-400/20 rounded-full blur-lg"></div>
-            </div>
+        <div className="text-center py-16 px-6 bg-card rounded-lg border border-secondary">
+          <div className="flex justify-center items-center mb-4">
+            <MapPinIcon className="w-12 h-12 text-muted-foreground" />
           </div>
-          <h3 className="text-2xl font-bold text-white mb-3">No adventures saved yet</h3>
-          <p className="text-gray-400 mb-6 leading-relaxed">
-            Start exploring and save your favorite spots to build your personal collection of amazing places!
+          <h3 className="text-xl font-semibold text-white mb-2">No favorites yet</h3>
+          <p className="text-muted-foreground mb-4">
+            Explore some itineraries and save your favorite stops to see them here.
           </p>
-          <Link href="/" className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-accent to-blue-400 text-primary font-bold rounded-xl hover:from-accent/90 hover:to-blue-400/90 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
-            🗺️ Start Exploring
+          <Link href="/" className="inline-flex items-center gap-2 px-4 py-2 bg-accent text-accent-foreground font-medium rounded-lg hover:bg-accent/90 transition-colors">
+            Start Exploring
           </Link>
         </div>
       )}

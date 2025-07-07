@@ -71,66 +71,42 @@ const HomePage = () => {
 
   return (
     <>
-      <div className="text-center mb-12 relative">
-        <div className="absolute inset-0 bg-gradient-to-r from-accent/10 via-blue-400/10 to-purple-500/10 rounded-3xl blur-3xl"></div>
-        <div className="relative z-10 py-8">
-          <h1 className="text-4xl md:text-6xl font-black tracking-tighter mb-6">
-            <span className="bg-gradient-to-r from-accent via-blue-400 to-purple-500 bg-clip-text text-transparent animate-gradient-shift bg-[length:200%_200%]">
-              Rediscover Your
-            </span>
-            <br />
-            <span className="text-white">Neighborhood ✨</span>
-          </h1>
-          <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
-            Enter any location to instantly generate 
-            <span className="text-accent font-semibold"> AI-powered micro-adventures</span> 
-            <br />and discover hidden gems around you! 🗺️
-          </p>
-        </div>
+      <div className="text-center mb-12">
+        <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-white mb-4">
+          Discover Local Adventures
+        </h1>
+        <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          Generate AI-powered walking itineraries for any location and explore hidden gems in your area.
+        </p>
       </div>
 
       <LocationInput onSearch={handleSearch} isLoading={generateItinerariesMutation.isPending} />
       
       {error && (
-        <div className="mt-8 mx-auto max-w-2xl animate-slide-up">
-          <div className="glass-morphism p-6 rounded-xl border border-red-400/30 bg-gradient-to-r from-red-500/10 to-pink-500/10">
-            <div className="flex items-center gap-3 mb-2">
-              <div className="w-8 h-8 bg-red-500/20 rounded-full flex items-center justify-center">
-                <span className="text-red-400 text-lg">⚠️</span>
-              </div>
-              <h3 className="font-semibold text-red-300">Adventure Discovery Failed</h3>
-            </div>
-            <p className="text-red-200/90 text-sm leading-relaxed">{error}</p>
-          </div>
+        <div className="mt-8 p-4 bg-destructive/20 border border-destructive/30 rounded-lg text-destructive text-sm max-w-2xl mx-auto">
+          {error}
         </div>
       )}
       
       {generateItinerariesMutation.isPending && <LoadingSpinner />}
 
       {!generateItinerariesMutation.isPending && itineraries.length > 0 && (
-        <div className="mt-16 animate-fade-in">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              <span className="bg-gradient-to-r from-accent via-blue-400 to-purple-500 bg-clip-text text-transparent">
-                Your Spontaneous Journeys
-              </span>
-              <span className="text-white"> 🎒</span>
+        <div className="mt-12">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-semibold text-white mb-2">
+              Your Local Adventures
             </h2>
-            <div className="flex items-center justify-center gap-2 text-gray-300">
-              <span>Generated for:</span>
-              <span className="px-3 py-1 bg-gradient-to-r from-accent/20 to-blue-400/20 border border-accent/30 rounded-lg font-semibold text-accent">
-                📍 {location}
-              </span>
-            </div>
+            <p className="text-muted-foreground">
+              Generated for <span className="text-accent font-medium">{location}</span>
+            </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {itineraries.map((itinerary, index) => (
-              <div key={itinerary.id} className="animate-slide-up" style={{animationDelay: `${index * 0.1}s`}}>
-                <ItineraryCard 
-                  itinerary={itinerary} 
-                  onSelect={handleSelectItinerary} 
-                />
-              </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {itineraries.map((itinerary) => (
+              <ItineraryCard 
+                key={itinerary.id}
+                itinerary={itinerary} 
+                onSelect={handleSelectItinerary} 
+              />
             ))}
           </div>
           {sources.length > 0 && <SourceList sources={sources} />}
