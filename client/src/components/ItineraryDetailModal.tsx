@@ -1,0 +1,127 @@
+import { Itinerary, Stop } from '../types';
+import { XIcon, ClockIcon, WalkIcon, MapPinIcon, HeartIcon } from './icons';
+import { useFavorites } from '../context/FavoritesContext';
+
+interface ItineraryDetailModalProps {
+  itinerary: Itinerary;
+  onClose: () => void;
+  location: string;
+}
+
+interface StopItemProps {
+  stop: Stop;
+  isLast: boolean;
+  location: string;
+}
+
+const StopItem = ({ stop, isLast, location }: StopItemProps) => {
+  const { addFavorite, removeFavorite, isFavorite } = useFavorites();
+  const favorited = isFavorite(stop.id);
+
+  const handleFavoriteClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (favorited) {
+      removeFavorite(stop.id);
+    } else {
+      addFavorite(stop);
+    }
+  };
+
+  const mapsQuery = encodeURIComponent(`${stop.name}, ${location}`);
+  const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
+
+  return (
+    <div className="relative">
+      <div className="flex items-start gap-4">
+        <div className="flex flex-col items-center self-stretch">
+          <div className="w-8 h-8 rounded-full bg-accent text-primary flex items-center justify-center font-bold flex-shrink-0 z-10">
+            <MapPinIcon className="w-5 h-5"/>
+          </div>
+          {!isLast && <div className="w-px h-full bg-gray-600 border border-dashed border-gray-600 absolute top-4 left-4 -z-0"></div>}
+        </div>
+        <div className="flex-1 pb-16">
+          <div className="relative mb-4">
+            {stop.image_url && (
+              <img 
+                src={stop.image_url} 
+                alt={`Image of ${stop.name}`} 
+                className="w-full h-48 object-cover rounded-lg border border-gray-700"
+              />
+            )}
+            <button 
+              onClick={handleFavoriteClick} 
+              className="absolute top-2 right-2 p-2 rounded-full bg-black/40 hover:bg-black/60 transition-colors"
+              aria-label={favorited ? 'Remove from favorites' : 'Add to favorites'}
+            >
+              <HeartIcon 
+                className={`w-6 h-6 transition-all duration-200 ${
+                  favorited ? 'text-red-500 fill-current' : 'text-white stroke-current fill-none'
+                }`} 
+                strokeWidth={favorited ? 0 : 2} 
+              />
+            </button>
+          </div>
+          <h4 className="font-bold text-lg text-white">
+            <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className="hover:underline hover:text-accent transition-colors duration-200">
+              {stop.name}
+            </a>
+          </h4>
+          <p className="text-sm text-accent font-semibold">{stop.category}</p>
+          <p className="mt-2 text-gray-300">{stop.description}</p>
+        </div>
+      </div>
+      {!isLast && (
+        <div className="flex items-center gap-2 -mt-12 mb-4 ml-[52px] text-gray-400">
+          <WalkIcon className="w-4 h-4" />
+          <span>{stop.walking_time_minutes} min walk from previous stop</span>
+        </div>
+      )}
+    </div>
+  );
+};
+
+const ItineraryDetailModal = ({ itinerary, onClose, location }: ItineraryDetailModalProps) => {
+  return (
+    <div 
+      className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4 animate-fade-in"
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="itinerary-title"
+    >
+      <div 
+        className="bg-secondary rounded-xl max-w-2xl w-full max-h-[90vh] flex flex-col border border-gray-700 shadow-2xl animate-slide-up"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <header className="p-6 border-b border-gray-700 flex justify-between items-center sticky top-0 bg-secondary z-10">
+          <div>
+            <h2 id="itinerary-title" className="text-2xl font-bold text-white">{itinerary.title}</h2>
+            <div className="flex items-center gap-2 text-gray-400 text-sm mt-1">
+              <ClockIcon className="w-4 h-4 text-accent" />
+              <span>~{Math.round(itinerary.duration_minutes / 60 * 10) / 10} hours total</span>
+            </div>
+          </div>
+          <button onClick={onClose} className="p-2 rounded-full hover:bg-card" aria-label="Close modal">
+            <XIcon className="w-6 h-6 text-gray-400"/>
+          </button>
+        </header>
+
+        <div className="p-6 overflow-y-auto">
+          <p className="text-gray-300 mb-8">{itinerary.description}</p>
+          <div className="flex flex-col">
+            {itinerary.stops.map((stop, index) => (
+              <StopItem 
+                key={stop.id} 
+                stop={stop} 
+                isLast={index === itinerary.stops.length - 1} 
+                location={location} 
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ItineraryDetailModal;
