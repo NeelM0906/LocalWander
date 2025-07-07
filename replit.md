@@ -32,6 +32,7 @@ Local Wander is a full-stack web application that generates personalized travel 
 - **Itineraries**: Collections of stops with title, description, duration, and location
 - **Grounding Chunks**: Source references from AI-generated content
 - **Users**: Basic user management structure (prepared but not implemented)
+- **Restaurants**: NYC restaurant data with cuisine, price range, location, and health grades
 
 ### AI Integration
 - **Service**: Google Gemini AI via @google/genai package
@@ -42,8 +43,9 @@ Local Wander is a full-stack web application that generates personalized travel 
 - **Location Input**: Text input with geolocation support (address autocomplete in development)
 - **Itinerary Display**: Card-based layout with detailed modal views
 - **Favorites System**: Local storage-based favorites with heart icons
+- **EATZZZ Feature**: NYC restaurant finder using real-time open data with filtering
 - **Responsive Design**: Mobile-first approach with Tailwind CSS
-- **Navigation**: Three-page navigation (Home, Favorites, Wander Buddies)
+- **Navigation**: Four-page navigation (Home, EATZZZ, Favorites, Wander Buddies)
 - **Interactive Modals**: Detailed itinerary views with Google Maps integration
 
 ## Data Flow
@@ -61,6 +63,8 @@ Local Wander is a full-stack web application that generates personalized travel 
 ### Production Dependencies
 - **AI Service**: Google Gemini AI API (requires GEMINI_API_KEY or GOOGLE_AI_API_KEY)
 - **Database**: Neon PostgreSQL (configured but using memory storage)
+- **NYC Open Data**: Restaurant inspections and food vendor data (no API key required)
+- **OpenStreetMap**: Geocoding and reverse geocoding services
 - **UI Components**: Radix UI primitives via shadcn/ui
 - **Icons**: Lucide React for consistent iconography
 
@@ -94,6 +98,7 @@ Local Wander is a full-stack web application that generates personalized travel 
 - July 07, 2025: Fixed TypeScript errors in storage layer
 - July 07, 2025: Marked address autocomplete as "in development" feature
 - July 07, 2025: Redesigned UI with clean, modern aesthetic - removed cluttered gradients and animations for professional look
+- July 07, 2025: Added EATZZZ feature - NYC cheap food finder using NYC Open Data with price/cuisine filtering
 
 ## User Preferences
 

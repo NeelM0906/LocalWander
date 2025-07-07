@@ -4,10 +4,11 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { FavoritesProvider, useFavorites } from "./context/FavoritesContext";
-import { LogoIcon, HeartIcon, UsersIcon } from "./components/icons";
+import { LogoIcon, HeartIcon, UsersIcon, UtensilsIcon } from "./components/icons";
 import HomePage from "./pages/HomePage";
 import FavoritesPage from "./pages/FavoritesPage";
 import WanderBuddiesPage from "./components/WanderBuddiesPage";
+import EatzzPage from "./components/EatzzPage";
 import NotFound from "@/pages/not-found";
 import { Link, useLocation } from "wouter";
 
@@ -22,6 +23,9 @@ function AppHeader() {
         <span className="text-xl sm:text-2xl font-bold tracking-tight">Local Wander</span>
       </Link>
       <div className="flex items-center gap-4">
+        <Link href="/eatzzz" className="p-2 text-muted-foreground hover:text-accent transition-colors" aria-label="Find Cheap Food">
+          <UtensilsIcon className="w-6 h-6"/>
+        </Link>
         <Link href="/buddies" className="p-2 text-muted-foreground hover:text-accent transition-colors" aria-label="View Wander Buddies">
           <UsersIcon className="w-6 h-6"/>
         </Link>
@@ -42,6 +46,7 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={HomePage} />
+      <Route path="/eatzzz" component={EatzzPage} />
       <Route path="/favorites" component={FavoritesPage} />
       <Route path="/buddies" component={WanderBuddiesPage} />
       <Route component={NotFound} />
