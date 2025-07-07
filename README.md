@@ -56,7 +56,7 @@ A hyper-local discovery app that generates AI-powered micro-adventures and itine
 
 ### 1. Clone and Install
 ```bash
-git clone <repository-url>
+git clone https://github.com/NeelM0906/LocalWander
 cd local-wander
 npm install
 ```
